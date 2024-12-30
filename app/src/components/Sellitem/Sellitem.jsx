@@ -1,0 +1,556 @@
+import React, { useState } from "react";
+import "./Sellitem.css";
+import Nav from "../Topbar/TopNav";
+import axios from "../../axios.js";
+import { useCookies } from "react-cookie";
+import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
+
+const Sellitem = () => {
+  const navigate = useNavigate;
+  const [step, setStep] = useState(1);
+  const [brand, setBrand] = useState("");
+  const [model, setModel] = useState("");
+  const [owner, setOwner] = useState("");
+  const [km, setKM] = useState("");
+  const [fueltype, setFueltype] = useState("");
+  const [transmission, setTransmission] = useState("");
+  const [manufactureryear, setManufactureryear] = useState("");
+  const [insurancevalidity, setInsurancevalidity] = useState("");
+  const [registrationyear, setRegistrationyear] = useState("");
+  const [address, setAddress] = useState("");
+  const [verifyStatus, setVrifystatus] = useState("");
+  const [images, setImages] = useState([]);
+
+  const handleNext = () => {
+    setStep((prevStep) => prevStep + 1);
+  };
+
+  const handlePrevious = () => {
+    setStep((prevStep) => prevStep - 1);
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await axios.post(
+        "/sellCars",
+        {
+          brand,
+          model,
+          owner,
+          km,
+          fueltype,
+          transmission,
+          manufactureryear,
+          insurancevalidity,
+          registrationyear,
+          address,
+        },
+        { withCredentials: true }
+      );
+
+      console.log(response.data);
+
+      const Toast = Swal.mixin({
+        toast: true,
+        position: "top-end",
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+          toast.addEventListener("mouseenter", Swal.stopTimer);
+          toast.addEventListener("mouseleave", Swal.resumeTimer);
+        },
+      });
+
+      Toast.fire({
+        icon: "success",
+        title: "Car Registered",
+        showCloseButton: true,
+      });
+
+      navigate("/sidebar");
+    } catch (error) {
+      console.log(error); // Log the error message to the console
+      Swal.fire({
+        icon: "error",
+        text: "Please check the details ",
+      });
+    }
+  };
+
+  const renderStepOne = () => (
+    <div className="form-step">
+      <h4 className="Sellitem-Placeholder">Brand</h4>
+      <input
+        className="selliteminput"
+        type="text"
+        id="brand"
+        value={brand}
+        onChange={(e) => setBrand(e.target.value)}
+      />
+      <button
+        type="button"
+        className="Nxtbutton"
+        onClick={handleNext}
+        style={{ marginTop: "3px" }}
+      >
+        <span>Next</span>
+        <svg
+          height="16"
+          width="16"
+          xmlns="http://www.w3.org/2000/svg"
+          version="1.1"
+          viewBox="0 0 1024 1024"
+        >
+          <path d="M149.308584 494.630501c0-11.2973 9.168824-20.466124 20.466124-20.466124l604.773963 0-188.083679-188.083679c-7.992021-7.992021-7.992021-20.947078 0-28.939099 3.990894-4.001127 9.240455-5.996574 14.46955-5.996574 5.239328 0 10.478655 1.995447 14.479783 5.996574l223.00912 223.00912c3.837398 3.837398 5.996574 9.046027 5.996574 14.46955 0 5.433756-2.159176 10.632151-5.996574 14.46955l-223.019353 223.029586c-7.992021 7.992021-20.957311 7.992021-28.949332 0-7.992021-8.002254-7.992021-20.957311 0-28.949332l188.073446-188.073446-604.753497 0C158.477408 515.096625 149.308584 505.938034 149.308584 494.630501z"></path>
+        </svg>
+      </button>
+    </div>
+  );
+
+  const renderStepTwo = () => (
+    <div className="form-step">
+      <h4 className="Sellitem-Placeholder">Model</h4>
+      <input
+        className="selliteminput"
+        type="text"
+        id="model"
+        value={model}
+        onChange={(e) => setModel(e.target.value)}
+      />
+      <button type="button" className="Prebutton" onClick={handlePrevious}>
+        <svg
+          height="16"
+          width="16"
+          xmlns="http://www.w3.org/2000/svg"
+          version="1.1"
+          viewBox="0 0 1024 1024"
+        >
+          <path d="M874.690416 495.52477c0 11.2973-9.168824 20.466124-20.466124 20.466124l-604.773963 0 188.083679 188.083679c7.992021 7.992021 7.992021 20.947078 0 28.939099-4.001127 3.990894-9.240455 5.996574-14.46955 5.996574-5.239328 0-10.478655-1.995447-14.479783-5.996574l-223.00912-223.00912c-3.837398-3.837398-5.996574-9.046027-5.996574-14.46955 0-5.433756 2.159176-10.632151 5.996574-14.46955l223.019353-223.029586c7.992021-7.992021 20.957311-7.992021 28.949332 0 7.992021 8.002254 7.992021 20.957311 0 28.949332l-188.073446 188.073446 604.753497 0C865.521592 475.058646 874.690416 484.217237 874.690416 495.52477z"></path>
+        </svg>
+        <span>Previous</span>
+      </button>
+      <button type="button" className="Nxtbutton" onClick={handleNext}>
+        <span>Next</span>
+        <svg
+          height="16"
+          width="16"
+          xmlns="http://www.w3.org/2000/svg"
+          version="1.1"
+          viewBox="0 0 1024 1024"
+        >
+          <path d="M149.308584 494.630501c0-11.2973 9.168824-20.466124 20.466124-20.466124l604.773963 0-188.083679-188.083679c-7.992021-7.992021-7.992021-20.947078 0-28.939099 3.990894-4.001127 9.240455-5.996574 14.46955-5.996574 5.239328 0 10.478655 1.995447 14.479783 5.996574l223.00912 223.00912c3.837398 3.837398 5.996574 9.046027 5.996574 14.46955 0 5.433756-2.159176 10.632151-5.996574 14.46955l-223.019353 223.029586c-7.992021 7.992021-20.957311 7.992021-28.949332 0-7.992021-8.002254-7.992021-20.957311 0-28.949332l188.073446-188.073446-604.753497 0C158.477408 515.096625 149.308584 505.938034 149.308584 494.630501z"></path>
+        </svg>
+      </button>
+    </div>
+  );
+
+  const renderStepThree = () => (
+    <div className="form-step">
+      <h4 className="Sellitem-Placeholder">Owner</h4>
+      <select
+        className="selliteminput1"
+        id="owner"
+        value={owner}
+        onChange={(e) => setOwner(e.target.value)}
+      >
+        <option value="">Select Owner</option>
+        <option value="1">1st Owner</option>
+        <option value="2">2nd Owner</option>
+        <option value="3">3rd Owner</option>
+      </select>
+      <button type="button" className="Prebutton" onClick={handlePrevious}>
+        <svg
+          height="16"
+          width="16"
+          xmlns="http://www.w3.org/2000/svg"
+          version="1.1"
+          viewBox="0 0 1024 1024"
+        >
+          {/* Previous button SVG path */}
+        </svg>
+        <span>Previous</span>
+      </button>
+      <button type="button" className="Nxtbutton" onClick={handleNext}>
+        <span>Next</span>
+        <svg
+          height="16"
+          width="16"
+          xmlns="http://www.w3.org/2000/svg"
+          version="1.1"
+          viewBox="0 0 1024 1024"
+        >
+          {/* Next button SVG path */}
+        </svg>
+      </button>
+    </div>
+  );
+
+  const renderStepFour = () => (
+    <div className="form-step">
+      <h4 className="Sellitem-Placeholder">KM Driven</h4>
+      <input
+        className="selliteminput"
+        type="number"
+        id="code"
+        value={km}
+        onChange={(e) => setKM(e.target.value)}
+      />
+      <button type="button" className="Prebutton" onClick={handlePrevious}>
+        <svg
+          height="16"
+          width="16"
+          xmlns="http://www.w3.org/2000/svg"
+          version="1.1"
+          viewBox="0 0 1024 1024"
+        >
+          <path d="M874.690416 495.52477c0 11.2973-9.168824 20.466124-20.466124 20.466124l-604.773963 0 188.083679 188.083679c7.992021 7.992021 7.992021 20.947078 0 28.939099-4.001127 3.990894-9.240455 5.996574-14.46955 5.996574-5.239328 0-10.478655-1.995447-14.479783-5.996574l-223.00912-223.00912c-3.837398-3.837398-5.996574-9.046027-5.996574-14.46955 0-5.433756 2.159176-10.632151 5.996574-14.46955l223.019353-223.029586c7.992021-7.992021 20.957311-7.992021 28.949332 0 7.992021 8.002254 7.992021 20.957311 0 28.949332l-188.073446 188.073446 604.753497 0C865.521592 475.058646 874.690416 484.217237 874.690416 495.52477z"></path>
+        </svg>
+        <span>Previous</span>
+      </button>
+      <button type="button" className="Nxtbutton" onClick={handleNext}>
+        <span>Next</span>
+        <svg
+          height="16"
+          width="16"
+          xmlns="http://www.w3.org/2000/svg"
+          version="1.1"
+          viewBox="0 0 1024 1024"
+        >
+          <path d="M149.308584 494.630501c0-11.2973 9.168824-20.466124 20.466124-20.466124l604.773963 0-188.083679-188.083679c-7.992021-7.992021-7.992021-20.947078 0-28.939099 3.990894-4.001127 9.240455-5.996574 14.46955-5.996574 5.239328 0 10.478655 1.995447 14.479783 5.996574l223.00912 223.00912c3.837398 3.837398 5.996574 9.046027 5.996574 14.46955 0 5.433756-2.159176 10.632151-5.996574 14.46955l-223.019353 223.029586c-7.992021 7.992021-20.957311 7.992021-28.949332 0-7.992021-8.002254-7.992021-20.957311 0-28.949332l188.073446-188.073446-604.753497 0C158.477408 515.096625 149.308584 505.938034 149.308584 494.630501z"></path>
+        </svg>
+      </button>
+    </div>
+  );
+
+  const renderStepFive = () => (
+    <div className="form-step">
+      <h4 className="Sellitem-Placeholder">Fuel Type</h4>
+      <select
+        className="selliteminput1"
+        id="owner"
+        value={fueltype}
+        onChange={(e) => setFueltype(e.target.value)}
+      >
+        <option value="">Select</option>
+        <option value="1">Petrol</option>
+        <option value="2">Diesel</option>
+        <option value="3">EV</option>
+      </select>
+      <button type="button" className="Prebutton" onClick={handlePrevious}>
+        <svg
+          height="16"
+          width="16"
+          xmlns="http://www.w3.org/2000/svg"
+          version="1.1"
+          viewBox="0 0 1024 1024"
+        >
+          {/* Previous button SVG path */}
+        </svg>
+        <span>Previous</span>
+      </button>
+      <button type="button" className="Nxtbutton" onClick={handleNext}>
+        <span>Next</span>
+        <svg
+          height="16"
+          width="16"
+          xmlns="http://www.w3.org/2000/svg"
+          version="1.1"
+          viewBox="0 0 1024 1024"
+        >
+          {/* Next button SVG path */}
+        </svg>
+      </button>
+    </div>
+  );
+
+  const renderStepSix = () => (
+    <div className="form-step">
+      <h4 className="Sellitem-Placeholder">Transmission</h4>
+      <select
+        className="selliteminput1"
+        id="owner"
+        value={transmission}
+        onChange={(e) => setTransmission(e.target.value)}
+      >
+        <option value="">Select</option>
+        <option value="1">Automatic</option>
+        <option value="2">Manual</option>
+      </select>
+      <button type="button" className="Prebutton" onClick={handlePrevious}>
+        <svg
+          height="16"
+          width="16"
+          xmlns="http://www.w3.org/2000/svg"
+          version="1.1"
+          viewBox="0 0 1024 1024"
+        >
+          {/* Previous button SVG path */}
+        </svg>
+        <span>Previous</span>
+      </button>
+      <button type="button" className="Nxtbutton" onClick={handleNext}>
+        <span>Next</span>
+        <svg
+          height="16"
+          width="16"
+          xmlns="http://www.w3.org/2000/svg"
+          version="1.1"
+          viewBox="0 0 1024 1024"
+        >
+          {/* Next button SVG path */}
+        </svg>
+      </button>
+    </div>
+  );
+
+  const renderStepSeven = () => (
+    <div className="form-step">
+      <h4 className="Sellitem-Placeholder">Manufacture Year</h4>
+      <input
+        className="selliteminput"
+        type="date"
+        id="location"
+        value={manufactureryear}
+        onChange={(e) => setManufactureryear(e.target.value)}
+      />
+      <button type="button" className="Prebutton" onClick={handlePrevious}>
+        <svg
+          height="16"
+          width="16"
+          xmlns="http://www.w3.org/2000/svg"
+          version="1.1"
+          viewBox="0 0 1024 1024"
+        >
+          <path d="M874.690416 495.52477c0 11.2973-9.168824 20.466124-20.466124 20.466124l-604.773963 0 188.083679 188.083679c7.992021 7.992021 7.992021 20.947078 0 28.939099-4.001127 3.990894-9.240455 5.996574-14.46955 5.996574-5.239328 0-10.478655-1.995447-14.479783-5.996574l-223.00912-223.00912c-3.837398-3.837398-5.996574-9.046027-5.996574-14.46955 0-5.433756 2.159176-10.632151 5.996574-14.46955l223.019353-223.029586c7.992021-7.992021 20.957311-7.992021 28.949332 0 7.992021 8.002254 7.992021 20.957311 0 28.949332l-188.073446 188.073446 604.753497 0C865.521592 475.058646 874.690416 484.217237 874.690416 495.52477z"></path>
+        </svg>
+        <span>Previous</span>
+      </button>
+      <button type="button" className="Nxtbutton" onClick={handleNext}>
+        <span>Next</span>
+        <svg
+          height="16"
+          width="16"
+          xmlns="http://www.w3.org/2000/svg"
+          version="1.1"
+          viewBox="0 0 1024 1024"
+        >
+          <path d="M149.308584 494.630501c0-11.2973 9.168824-20.466124 20.466124-20.466124l604.773963 0-188.083679-188.083679c-7.992021-7.992021-7.992021-20.947078 0-28.939099 3.990894-4.001127 9.240455-5.996574 14.46955-5.996574 5.239328 0 10.478655 1.995447 14.479783 5.996574l223.00912 223.00912c3.837398 3.837398 5.996574 9.046027 5.996574 14.46955 0 5.433756-2.159176 10.632151-5.996574 14.46955l-223.019353 223.029586c-7.992021 7.992021-20.957311 7.992021-28.949332 0-7.992021-8.002254-7.992021-20.957311 0-28.949332l188.073446-188.073446-604.753497 0C158.477408 515.096625 149.308584 505.938034 149.308584 494.630501z"></path>
+        </svg>
+      </button>
+    </div>
+  );
+
+  const renderStepEight = () => (
+    <div className="form-step">
+      <h4 className="Sellitem-Placeholder">Insurance Validity</h4>
+      <input
+        className="selliteminput"
+        type="date"
+        id="location"
+        value={insurancevalidity}
+        onChange={(e) => setInsurancevalidity(e.target.value)}
+      />
+      <button type="button" className="Prebutton" onClick={handlePrevious}>
+        <svg
+          height="16"
+          width="16"
+          xmlns="http://www.w3.org/2000/svg"
+          version="1.1"
+          viewBox="0 0 1024 1024"
+        >
+          <path d="M874.690416 495.52477c0 11.2973-9.168824 20.466124-20.466124 20.466124l-604.773963 0 188.083679 188.083679c7.992021 7.992021 7.992021 20.947078 0 28.939099-4.001127 3.990894-9.240455 5.996574-14.46955 5.996574-5.239328 0-10.478655-1.995447-14.479783-5.996574l-223.00912-223.00912c-3.837398-3.837398-5.996574-9.046027-5.996574-14.46955 0-5.433756 2.159176-10.632151 5.996574-14.46955l223.019353-223.029586c7.992021-7.992021 20.957311-7.992021 28.949332 0 7.992021 8.002254 7.992021 20.957311 0 28.949332l-188.073446 188.073446 604.753497 0C865.521592 475.058646 874.690416 484.217237 874.690416 495.52477z"></path>
+        </svg>
+        <span>Previous</span>
+      </button>
+      <button type="button" className="Nxtbutton" onClick={handleNext}>
+        <span>Next</span>
+        <svg
+          height="16"
+          width="16"
+          xmlns="http://www.w3.org/2000/svg"
+          version="1.1"
+          viewBox="0 0 1024 1024"
+        >
+          <path d="M149.308584 494.630501c0-11.2973 9.168824-20.466124 20.466124-20.466124l604.773963 0-188.083679-188.083679c-7.992021-7.992021-7.992021-20.947078 0-28.939099 3.990894-4.001127 9.240455-5.996574 14.46955-5.996574 5.239328 0 10.478655 1.995447 14.479783 5.996574l223.00912 223.00912c3.837398 3.837398 5.996574 9.046027 5.996574 14.46955 0 5.433756-2.159176 10.632151-5.996574 14.46955l-223.019353 223.029586c-7.992021 7.992021-20.957311 7.992021-28.949332 0-7.992021-8.002254-7.992021-20.957311 0-28.949332l188.073446-188.073446-604.753497 0C158.477408 515.096625 149.308584 505.938034 149.308584 494.630501z"></path>
+        </svg>
+      </button>
+    </div>
+  );
+
+  const renderStepNine = () => (
+    <div className="form-step">
+      <h4 className="Sellitem-Placeholder">Registration Year</h4>
+      <input
+        className="selliteminput"
+        type="date"
+        id="location"
+        value={registrationyear}
+        onChange={(e) => setRegistrationyear(e.target.value)}
+      />
+      <button type="button" className="Prebutton" onClick={handlePrevious}>
+        <svg
+          height="16"
+          width="16"
+          xmlns="http://www.w3.org/2000/svg"
+          version="1.1"
+          viewBox="0 0 1024 1024"
+        >
+          <path d="M874.690416 495.52477c0 11.2973-9.168824 20.466124-20.466124 20.466124l-604.773963 0 188.083679 188.083679c7.992021 7.992021 7.992021 20.947078 0 28.939099-4.001127 3.990894-9.240455 5.996574-14.46955 5.996574-5.239328 0-10.478655-1.995447-14.479783-5.996574l-223.00912-223.00912c-3.837398-3.837398-5.996574-9.046027-5.996574-14.46955 0-5.433756 2.159176-10.632151 5.996574-14.46955l223.019353-223.029586c7.992021-7.992021 20.957311-7.992021 28.949332 0 7.992021 8.002254 7.992021 20.957311 0 28.949332l-188.073446 188.073446 604.753497 0C865.521592 475.058646 874.690416 484.217237 874.690416 495.52477z"></path>
+        </svg>
+        <span>Previous</span>
+      </button>
+      <button type="button" className="Nxtbutton" onClick={handleNext}>
+        <span>Next</span>
+        <svg
+          height="16"
+          width="16"
+          xmlns="http://www.w3.org/2000/svg"
+          version="1.1"
+          viewBox="0 0 1024 1024"
+        >
+          <path d="M149.308584 494.630501c0-11.2973 9.168824-20.466124 20.466124-20.466124l604.773963 0-188.083679-188.083679c-7.992021-7.992021-7.992021-20.947078 0-28.939099 3.990894-4.001127 9.240455-5.996574 14.46955-5.996574 5.239328 0 10.478655 1.995447 14.479783 5.996574l223.00912 223.00912c3.837398 3.837398 5.996574 9.046027 5.996574 14.46955 0 5.433756-2.159176 10.632151-5.996574 14.46955l-223.019353 223.029586c-7.992021 7.992021-20.957311 7.992021-28.949332 0-7.992021-8.002254-7.992021-20.957311 0-28.949332l188.073446-188.073446-604.753497 0C158.477408 515.096625 149.308584 505.938034 149.308584 494.630501z"></path>
+        </svg>
+      </button>
+    </div>
+  );
+  const renderStepTen = () => (
+    <div className="form-step">
+      <h4 className="Sellitem-Placeholder">Address</h4>
+      <input
+        className="selliteminput"
+        type="text"
+        id="location"
+        value={address}
+        onChange={(e) => setAddress(e.target.value)}
+      />
+      <button type="button" className="Prebutton" onClick={handlePrevious}>
+        <svg
+          height="16"
+          width="16"
+          xmlns="http://www.w3.org/2000/svg"
+          version="1.1"
+          viewBox="0 0 1024 1024"
+        >
+          <path d="M874.690416 495.52477c0 11.2973-9.168824 20.466124-20.466124 20.466124l-604.773963 0 188.083679 188.083679c7.992021 7.992021 7.992021 20.947078 0 28.939099-4.001127 3.990894-9.240455 5.996574-14.46955 5.996574-5.239328 0-10.478655-1.995447-14.479783-5.996574l-223.00912-223.00912c-3.837398-3.837398-5.996574-9.046027-5.996574-14.46955 0-5.433756 2.159176-10.632151 5.996574-14.46955l223.019353-223.029586c7.992021-7.992021 20.957311-7.992021 28.949332 0 7.992021 8.002254 7.992021 20.957311 0 28.949332l-188.073446 188.073446 604.753497 0C865.521592 475.058646 874.690416 484.217237 874.690416 495.52477z"></path>
+        </svg>
+        <span>Previous</span>
+      </button>
+      <button type="button" className="Nxtbutton" onClick={handleNext}>
+        <span>Next</span>
+        <svg
+          height="16"
+          width="16"
+          xmlns="http://www.w3.org/2000/svg"
+          version="1.1"
+          viewBox="0 0 1024 1024"
+        >
+          <path d="M149.308584 494.630501c0-11.2973 9.168824-20.466124 20.466124-20.466124l604.773963 0-188.083679-188.083679c-7.992021-7.992021-7.992021-20.947078 0-28.939099 3.990894-4.001127 9.240455-5.996574 14.46955-5.996574 5.239328 0 10.478655 1.995447 14.479783 5.996574l223.00912 223.00912c3.837398 3.837398 5.996574 9.046027 5.996574 14.46955 0 5.433756-2.159176 10.632151-5.996574 14.46955l-223.019353 223.029586c-7.992021 7.992021-20.957311 7.992021-28.949332 0-7.992021-8.002254-7.992021-20.957311 0-28.949332l188.073446-188.073446-604.753497 0C158.477408 515.096625 149.308584 505.938034 149.308584 494.630501z"></path>
+        </svg>
+      </button>
+    </div>
+  );
+
+  const renderStepEleven = () => (
+    <div className="form-step">
+      <h4 className="Sellitem-Placeholder"> Car Image</h4>
+      <input
+        className="selliteminput"
+        type="file"
+        id="images"
+        value={images}
+        multiple
+        onChange={(e) => setImages(Array.from(e.target.files))}
+      />
+      <button type="button" className="Prebutton" onClick={handlePrevious}>
+        <svg
+          height="16"
+          width="16"
+          xmlns="http://www.w3.org/2000/svg"
+          version="1.1"
+          viewBox="0 0 1024 1024"
+        >
+          <path d="M874.690416 495.52477c0 11.2973-9.168824 20.466124-20.466124 20.466124l-604.773963 0 188.083679 188.083679c7.992021 7.992021 7.992021 20.947078 0 28.939099-4.001127 3.990894-9.240455 5.996574-14.46955 5.996574-5.239328 0-10.478655-1.995447-14.479783-5.996574l-223.00912-223.00912c-3.837398-3.837398-5.996574-9.046027-5.996574-14.46955 0-5.433756 2.159176-10.632151 5.996574-14.46955l223.019353-223.029586c7.992021-7.992021 20.957311-7.992021 28.949332 0 7.992021 8.002254 7.992021 20.957311 0 28.949332l-188.073446 188.073446 604.753497 0C865.521592 475.058646 874.690416 484.217237 874.690416 495.52477z"></path>
+        </svg>
+        <span>Previous</span>
+      </button>
+      <button type="button" className="Nxtbutton" onClick={handleNext}>
+        <span>Next</span>
+        <svg
+          height="16"
+          width="16"
+          xmlns="http://www.w3.org/2000/svg"
+          version="1.1"
+          viewBox="0 0 1024 1024"
+        >
+          <path d="M149.308584 494.630501c0-11.2973 9.168824-20.466124 20.466124-20.466124l604.773963 0-188.083679-188.083679c-7.992021-7.992021-7.992021-20.947078 0-28.939099 3.990894-4.001127 9.240455-5.996574 14.46955-5.996574 5.239328 0 10.478655 1.995447 14.479783 5.996574l223.00912 223.00912c3.837398 3.837398 5.996574 9.046027 5.996574 14.46955 0 5.433756-2.159176 10.632151-5.996574 14.46955l-223.019353 223.029586c-7.992021 7.992021-20.957311 7.992021-28.949332 0-7.992021-8.002254-7.992021-20.957311 0-28.949332l188.073446-188.073446-604.753497 0C158.477408 515.096625 149.308584 505.938034 149.308584 494.630501z"></path>
+        </svg>
+      </button>
+    </div>
+  );
+
+  const renderStepTwelth = () => (
+    <div className="form-step">
+      <h4 className="Sellitem-Placeholder"> Proof</h4>
+      <input
+        className="selliteminput"
+        type="file"
+        id="images"
+        value={images}
+        multiple
+        onChange={(e) => setImages(Array.from(e.target.files))}
+      />
+      <button type="button" className="Prebutton" onClick={handlePrevious}>
+        <svg
+          height="16"
+          width="16"
+          xmlns="http://www.w3.org/2000/svg"
+          version="1.1"
+          viewBox="0 0 1024 1024"
+        >
+          <path d="M874.690416 495.52477c0 11.2973-9.168824 20.466124-20.466124 20.466124l-604.773963 0 188.083679 188.083679c7.992021 7.992021 7.992021 20.947078 0 28.939099-4.001127 3.990894-9.240455 5.996574-14.46955 5.996574-5.239328 0-10.478655-1.995447-14.479783-5.996574l-223.00912-223.00912c-3.837398-3.837398-5.996574-9.046027-5.996574-14.46955 0-5.433756 2.159176-10.632151 5.996574-14.46955l223.019353-223.029586c7.992021-7.992021 20.957311-7.992021 28.949332 0 7.992021 8.002254 7.992021 20.957311 0 28.949332l-188.073446 188.073446 604.753497 0C865.521592 475.058646 874.690416 484.217237 874.690416 495.52477z"></path>
+        </svg>
+        <span>Previous</span>
+      </button>
+      <button type="submit" className="sellsubmit">
+        Submit
+      </button>
+    </div>
+  );
+
+  return (
+    <div>
+      <Nav />
+
+      <div
+        className="Backimg"
+        style={{
+          marginTop: "22px",
+        }}
+      >
+        <div className="sellcardiv">
+          <h4 className="sd1">Enter Item Details</h4>
+
+          <form className="sell-item-form" onSubmit={handleSubmit}>
+            {step === 1 && renderStepOne()}
+            {step === 2 && renderStepTwo()}
+            {step === 3 && renderStepThree()}
+            {step === 4 && renderStepFour()}
+            {step === 5 && renderStepFive()}
+            {step === 6 && renderStepSix()}
+            {step === 7 && renderStepSeven()}
+            {step === 8 && renderStepEight()}
+            {step === 9 && renderStepNine()}
+            {step === 10 && renderStepTen()}
+            {step === 11 && renderStepEleven()}
+            {step === 12 && renderStepTwelth()}
+          </form>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default Sellitem;

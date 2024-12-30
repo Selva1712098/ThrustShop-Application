@@ -1,0 +1,294 @@
+@import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,300,600");
+a {
+  text-decoration: none;
+}
+
+a:hover {
+  transition: all 0.6s ease;
+}
+
+.app {
+  height: 100vh;
+}
+
+.pettt-card {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sidebar {
+  position: absolute;
+  width: 17em;
+  height: 100vh;
+  top: 95px;
+  overflow: hidden;
+  background-color: #19222a;
+  -webkit-transform: translateZ(0);
+  visibility: visible;
+  -webkit-backface-visibility: hidden;
+}
+
+.sidebar header {
+  background-color: #09f;
+  width: 80%;
+  height: 23px;
+  display: block;
+  padding: 0.75em 1em;
+}
+
+.kannadi {
+  display: flex;
+  flex-direction: row;
+}
+
+@media (max-width: 820px) {
+  .kannadi {
+    display: flex;
+    flex-direction: row;
+  }
+  .innerhead {
+    display: flex;
+    font-weight: bold;
+    font-family: serif;
+    font-size: 20px;
+    margin-left: 500px;
+    font-family: Poppins;
+    position: relative;
+    top: 20px;
+    text-align: center;
+    right: 130px;
+  }
+  .innerorder {
+    display: flex;
+    width: 100%;
+    height: 40px;
+    text-align: center;
+    justify-content: center;
+    font-family: Poppins;
+    margin-bottom: 180px;
+    position: relative;
+    top: 164px;
+    left: 100px;
+  }
+  .addpro {
+    padding: 0.5rem 2rem;
+    border-radius: 5px;
+    font-weight: 600;
+    border: 1px solid black;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    margin: auto;
+    align-items: center;
+    position: relative;
+    left: 100px;
+  }
+}
+.dashorder {
+  height: 100%;
+}
+
+.dashorder header {
+  background-color: #09f;
+  width: 100%;
+  height: 23px;
+  display: block;
+  padding: 0.75em 1em;
+  margin-left: -50px;
+}
+
+.innerhead {
+  display: flex;
+  font-weight: bold;
+  font-family: serif;
+  font-size: 20px;
+  margin-left: 500px;
+  font-family: Poppins;
+  position: relative;
+  top: 20px;
+}
+
+.innerorder {
+  display: flex;
+  width: 100%;
+  height: 40px;
+  text-align: center;
+  justify-content: center;
+  font-family: Poppins;
+  margin-bottom: 180px;
+  position: relative;
+  top: 164px;
+}
+
+.Dashhead {
+  display: flex;
+  margin: auto;
+  margin-left: 25px;
+  height: 30px;
+  margin-top: 20px;
+  color: #fff;
+  font-family: Poppins;
+}
+
+.sidebar-nav {
+  background-color: #19222a;
+  height: 100vh;
+  font-weight: 400;
+  font-size: 1.2em;
+  overflow: auto;
+  width: 100%;
+  padding-bottom: 6em;
+  z-index: 9;
+  overflow: hidden;
+  -webkit-overflow-scrolling: touch;
+}
+
+.sidebar-nav ul {
+  list-style: none;
+  display: block;
+  padding: 0;
+  margin: 0;
+}
+
+.sidebar-nav ul li {
+  margin-left: 0;
+  padding-left: 0;
+  display: inline-block;
+  width: 100%;
+}
+
+.sidebar-nav ul li a {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 0.75em;
+  padding: 1.05em 1em;
+  position: relative;
+  display: block;
+}
+
+.sidebar-nav ul li a:hover {
+  background-color: rgba(0, 0, 0, 0.9);
+  transition: all 0.6s ease;
+}
+
+.sidebar-nav ul li i {
+  font-size: 1.8em;
+  padding-right: 0.5em;
+  width: 9em;
+  display: inline;
+  vertical-align: middle;
+}
+
+.sidebar-nav .nav-flyout {
+  position: absolute;
+  background-color: #080d11;
+  z-index: 9;
+  left: 2.5em;
+  top: 0;
+  height: 100vh;
+  transform: translateX(100%);
+  transition: all 0.5s ease;
+}
+
+.sidebar-nav .nav-flyout a:hover {
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+.sidebar-nav ul > li:hover .nav-flyout {
+  transform: translateX(0);
+  transition: all 0.5s ease;
+}
+
+.sidesidecontent {
+  padding: 1rem;
+}
+
+.addpro {
+  padding: 0.5rem 2rem;
+  border-radius: 5px;
+  font-weight: 600;
+  border: 1px solid black;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  margin: auto;
+}
+
+.addpro:hover {
+  background-color: #ef6e0b;
+  color: white;
+  transform: scale(1.1);
+  font-weight: 700;
+  box-shadow: 7px 7px 23px -12px rgb(26, 91, 255);
+  border: none;
+}
+
+.addpro:active {
+  background-color: rgb(239, 110, 11);
+}
+
+.carr-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 auto;
+  border: 1px solid #ccc;
+  border-radius: 15px;
+  width: 250px;
+  background-color: #f5f5f5;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+  position: relative;
+  top: 50px;
+  left: 50px;
+  height: 330px;
+}
+
+.carr-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+@media (min-width: 768px) {
+  .carr-card {
+    flex-basis: calc(33.33% - 20px);
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+}
+.card-card {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 30px;
+  overflow: auto;
+  height: 100%;
+}
+
+.carcardcar {
+  height: 100%;
+}
+
+.car-image {
+  display: block;
+  margin: 0 auto;
+}
+
+.car-title {
+  text-align: center;
+}
+
+.car-info {
+  text-align: center;
+}
+
+.car-location {
+  text-align: center;
+}
+
+.car-price {
+  text-align: center;
+}
+
+.leo {
+  font-family: Popi;
+}/*# sourceMappingURL=Sidebar.css.map */

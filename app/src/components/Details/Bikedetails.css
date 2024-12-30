@@ -1,0 +1,21 @@
+@media screen and (max-width: 768px) {
+    .grid-11{
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+    }
+}
+
+.bikeeyy {
+    border: 1px solid rgb(232, 232, 232);
+    border-radius: 12px;
+    gap:1px;
+    overflow: hidden;
+    padding: 12px 24px  10px;
+    width: 85%;
+    position: relative;
+    background-color: #fafafa;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    font: 16px/1 Times New Roman;
+   
+}

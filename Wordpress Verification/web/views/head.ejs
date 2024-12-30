@@ -1,0 +1,123 @@
+<!-- <div class="pmbrand">
+  <a class="navbar-brand stretched-link" href="/">
+    <img
+      style="width: 100%; height: 70px"
+      src="https://www.linkpicture.com/q/cars-valley-removebg-preview.png"
+    /><span class="logo-market"></span>
+  </a>
+  <div class="logobyline">Buy Verified Cars</div>
+</div>
+<button
+  class="navbar-toggler"
+  type="button"
+  data-toggle="collapse"
+  data-target="#navbarCollapse"
+  aria-controls="navbarCollapse"
+  aria-expanded="false"
+  aria-label="Toggle navigation"
+>
+  <i class="bi bi-justify menuicon"></i>
+</button>
+<div class="collapse navbar-collapse" id="navbarCollapse">
+  <ul class="navbar-nav ml-auto">
+    <li class="nav-item">
+      <a class="nav-link" href="/verification">Login</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="/verif-register">Register</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="/verif-veriflist">Verification List</a>
+    </li>
+  </ul>
+</div> -->
+
+<div class="pmbrand">
+    <a class="navbar-brand stretched-link" href="/">
+      <img
+        style="width: 100%; height: 70px"
+        src="../public/images/ts.png"
+      /><span class="logo-market"></span>
+    </a>
+    <div class="logobyline">Buy Verified Bikes</div>
+  </div>
+  <button
+    class="navbar-toggler"
+    type="button"
+    data-toggle="collapse"
+    data-target="#navbarCollapse"
+    aria-controls="navbarCollapse"
+    aria-expanded="false"
+    aria-label="Toggle navigation"
+  >
+    <i class="bi bi-justify menuicon"></i>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarCollapse">
+    <ul class="navbar-nav ml-auto" id="navList">
+      <li class="nav-item">
+        <a class="nav-link" href="/verification">Login</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/verif-register">Register</a>
+      </li>
+      <!-- <li class="nav-item">
+        <a class="nav-link" href="/verif-veriflist">Verification List</a>
+      </li> -->
+      <!-- Placeholder for Logout button, initially hidden -->
+      <li class="nav-item" id="logoutBtn" style="display: none">
+        <a class="nav-link" href="/logout">Logout</a>
+      </li>
+    </ul>
+  </div>
+  
+  <!-- ... Your existing HTML code ... -->
+  
+  <!-- ... Your existing HTML code ... -->
+  <!-- ... Your existing HTML code ... -->
+  
+  <script>
+    // Function to clear the session and cookie
+    function clearSessionAndCookie() {
+      // Clear the session storage (you can add more steps here if needed)
+      sessionStorage.clear();
+  
+      // Clear the cookie
+      document.cookie =
+        "verifier_sessionId=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+  
+      // Navigate to the verification page
+      window.location.href = "/verification";
+    }
+  
+    // Check if the cookie is present (replace 'your_cookie_name' with your actual cookie name)
+    const isCookiePresent = document.cookie.includes("verifier_sessionId");
+  
+    // Get the navigation list and the logout button element
+    const navList = document.getElementById("navList");
+    const logoutBtn = document.getElementById("logoutBtn");
+  
+    // If the cookie is present, show the logout button and remove login/register buttons
+    if (isCookiePresent) {
+      // Show the logout button
+      logoutBtn.style.display = "block";
+  
+      // Remove the login and register buttons
+      const loginNavItem = navList.querySelector('a[href="/verification"]');
+      const registerNavItem = navList.querySelector('a[href="/verif-register"]');
+  
+      if (loginNavItem) {
+        loginNavItem.parentElement.remove();
+      }
+      if (registerNavItem) {
+        registerNavItem.parentElement.remove();
+      }
+    }
+  
+    // Add event listener to the logout button
+    logoutBtn.addEventListener("click", function (event) {
+      event.preventDefault(); // Prevent the default behavior of the link
+      // Clear the session and cookie
+      clearSessionAndCookie();
+    });
+  </script>
+  

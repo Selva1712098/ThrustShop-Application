@@ -1,0 +1,85 @@
+.cardverify {
+  background-color: #f8f8f8;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  padding: 20px;
+  max-width: 800px; /* Adjust the max-width as needed */
+  margin: auto;
+  margin-top: 50px;
+}
+
+.card-heading {
+  font-size: 28px;
+  margin-bottom: 20px;
+  font-family: "Arial", sans-serif; /* Use a modern font */
+  color: #333;
+}
+
+.card-options {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.option-button {
+  font-family: "Arial", sans-serif;
+  margin: 0 10px;
+  padding: 10px 20px;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  background-color: #007bff; /* Use a primary color */
+  transition: background-color 0.3s ease;
+}
+
+.option-button:hover {
+  background-color: #0056b3; /* Darker shade on hover */
+}
+
+.option-button.selected {
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.details-container {
+  /* margin-top: 20px; */
+  margin: auto;
+  margin-left: 210px;
+}
+
+.details,
+.certificates {
+  display: none;
+}
+
+.details.show,
+.certificates.show {
+  display: block;
+}
+
+.category {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  text-align: left;
+}
+
+.category i {
+  margin-right: 8px;
+}
+
+.category-label {
+  flex-basis: 30%;
+  font-weight: bold;
+  background-color: #f1f1f1;
+  padding: 8px 12px; /* Increase padding for better visual separation */
+}
+
+.category-value {
+  font-family: "Arial", sans-serif;
+  flex-basis: 70%;
+  margin-left: 10px;
+}
+
+/* ... Add any other styles and improvements you want to make here */

@@ -1,0 +1,48 @@
+.contact-social {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+  margin-right: 40px;
+  margin-top: 30px;
+}
+
+.contact-social ul {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  list-style: none;
+}
+
+.contact-social ul li {
+  margin: 0 10px;
+}
+
+.contact-social ul li a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #8b9199;
+  color: #8b9199;
+  height: 40px;
+  width: 40px;
+  transition: all 0.4s ease 0s;
+}
+
+.contact-social ul li a:hover {
+  border: 1px solid #fab702;
+  color: #fab702;
+}
+
+.contact-social ul li a .fab.fa-facebook-f:before,
+.contact-social ul li a .fab.fa-instagram:before {
+  font-size: 18px;
+}
+
+.foottt {
+  /* margin: auto; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  list-style: none;
+}
